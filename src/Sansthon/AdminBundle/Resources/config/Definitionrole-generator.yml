@@ -1,0 +1,42 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Definitionrole
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: Liste des roles
+      display: ~
+      actions:
+        new: ~
+      object_actions:
+        edit: ~
+        delete: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: Nouveau role
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "Edition du role \"%object%\"|{ %object%: Definitionrole.id }|"
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "Description du role \"%object%\"|{ %object%: Definitionrole.id }|"
+      display: ~
+      actions:
+        list: ~
+        new: ~
+  delete: ~

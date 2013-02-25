@@ -1,0 +1,42 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Etapefille
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: Liste des Chemin
+      display: ~
+      actions:
+        new: ~
+      object_actions:
+        edit: ~
+        delete: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: Nouveau chemin
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "Modification du chemin \"%object%\"|{ %object%: Etapefille.id }|"
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "description du chemin \"%object%\"|{ %object%: Etapefille.id }|"
+      display: ~
+      actions:
+        list: ~
+        new: ~
+  delete: ~

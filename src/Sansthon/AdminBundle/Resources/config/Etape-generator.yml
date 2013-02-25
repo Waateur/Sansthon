@@ -1,0 +1,42 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Etape
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: Liste des Etapes
+      display: ~
+      actions:
+        new: ~
+      object_actions:
+        edit: ~
+        delete: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: Nouvelle Etape
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "Edition de l'Etape \"%object%\"|{ %object%: Etape.nom }|"
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "Description de l'Etape  \"%object%\"|{ %object%: Etape.nom }|"
+      display: ~
+      actions:
+        list: ~
+        new: ~
+  delete: ~

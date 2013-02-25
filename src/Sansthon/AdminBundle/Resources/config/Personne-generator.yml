@@ -1,0 +1,42 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Personne
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: Liste des Personnes
+      display: ~
+      actions:
+        new: ~
+      object_actions:
+        edit: ~
+        delete: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: Ajouter une Personne
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      display: ~
+      actions:
+        list: ~
+        new: ~
+  delete: ~
