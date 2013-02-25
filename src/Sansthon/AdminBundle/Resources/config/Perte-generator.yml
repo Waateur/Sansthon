@@ -1,6 +1,6 @@
 generator: admingenerator.generator.doctrine
 params:
-  model: Sansthon\ProdBundle\Entity\Personne
+  model: Sansthon\ProdBundle\Entity\Perte
   namespace_prefix: Sansthon
   bundle_name: AdminBundle
   fields: ~
@@ -8,7 +8,7 @@ params:
 builders:
   list:
     params:
-      title: Liste des Personnes
+      title: List des Pertes
       display: ~
       actions:
         new: ~
@@ -20,21 +20,21 @@ builders:
       display: ~
   new:
     params:
-      title: Ajouter une Personne
-      display: ~
+      title: Création d'une pertes
+      display: [id]
       actions:
         save: ~
         list: ~
   edit:
     params:
-      title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Modification de la pertes \"%object%\"|{ %object%: Perte.id }|"
       display: ~
       actions:
         save: ~
         list: ~
   show:
     params:
-      title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Description de la perte \"%object%\"|{ %object%: Perte.id }|"
       display: ~
       actions:
         list: ~

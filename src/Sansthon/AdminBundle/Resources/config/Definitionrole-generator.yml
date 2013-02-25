@@ -8,7 +8,7 @@ params:
 builders:
   list:
     params:
-      title: Liste des roles
+      title: Liste des Definition Roles
       display: ~
       actions:
         new: ~
@@ -20,21 +20,21 @@ builders:
       display: ~
   new:
     params:
-      title: Nouveau role
+      title: Definire un Roles
       display: ~
       actions:
         save: ~
         list: ~
   edit:
     params:
-      title: "Edition du role \"%object%\"|{ %object%: Definitionrole.id }|"
+      title: "Edition de la definition  \"%object%\"|{ %object%: Definitionrole.id }|"
       display: ~
       actions:
         save: ~
         list: ~
   show:
     params:
-      title: "Description du role \"%object%\"|{ %object%: Definitionrole.id }|"
+      title: "Description de la definition \"%object%\"|{ %object%: Definitionrole.id }|"
       display: ~
       actions:
         list: ~

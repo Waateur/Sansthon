@@ -1,6 +1,6 @@
 generator: admingenerator.generator.doctrine
 params:
-  model: Sansthon\ProdBundle\Entity\Personne
+  model: Sansthon\ProdBundle\Entity\Stock
   namespace_prefix: Sansthon
   bundle_name: AdminBundle
   fields: ~
@@ -8,7 +8,7 @@ params:
 builders:
   list:
     params:
-      title: Liste des Personnes
+      title: Etat des Stocks
       display: ~
       actions:
         new: ~
@@ -20,21 +20,21 @@ builders:
       display: ~
   new:
     params:
-      title: Ajouter une Personne
+      title: Ajouter un Stock
       display: ~
       actions:
         save: ~
         list: ~
   edit:
     params:
-      title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Modifcation du stock de \"%object%\" a l'etape %etape%|{ %object%: Stock.type, %etape% : Stock.etape }|"
       display: ~
       actions:
         save: ~
         list: ~
   show:
     params:
-      title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Description du Stock de  \"%object%\" a l'etape %etape% |{ %object%: Stock.type, %etape% : Stock.etape }|"
       display: ~
       actions:
         list: ~

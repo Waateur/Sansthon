@@ -1,6 +1,6 @@
 generator: admingenerator.generator.doctrine
 params:
-  model: Sansthon\ProdBundle\Entity\Personne
+  model: Sansthon\ProdBundle\Entity\Role
   namespace_prefix: Sansthon
   bundle_name: AdminBundle
   fields: ~
@@ -8,7 +8,7 @@ params:
 builders:
   list:
     params:
-      title: Liste des Personnes
+      title: Liste des Roles
       display: ~
       actions:
         new: ~
@@ -20,21 +20,21 @@ builders:
       display: ~
   new:
     params:
-      title: Ajouter une Personne
+      title: Ajouter un nouveau Roles
       display: ~
       actions:
         save: ~
         list: ~
   edit:
     params:
-      title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Edition du Role \"%object%\"|{ %object%: Role.id }|"
       display: ~
       actions:
         save: ~
         list: ~
   show:
     params:
-      title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
+      title: "Description du Role \"%object%\"|{ %object%: Role.id }|"
       display: ~
       actions:
         list: ~
