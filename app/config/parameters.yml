@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: SansthonSf2
+    database_user: sansthon
+    database_password: sansthon
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    secret: dc10aa1e557155f40745c42ea22c1d8110
+    database_path: null

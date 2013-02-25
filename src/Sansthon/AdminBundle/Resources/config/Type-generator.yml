@@ -1,0 +1,46 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Type
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: List for AdminBundle
+      display:
+        None: [id]
+      actions:
+        new: ~
+      object_actions:
+        edit: ~
+        delete: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: New object for AdminBundle
+      display:
+        None: [id]
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "You're editing the object \"%object%\"|{ %object%: Type.reference }|"
+      display: 
+        NONE: [id]
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "You're viewing the object \"%object%\"|{ %object%: Type.reference }|"
+      display:
+        NONE: [id]
+      actions:
+        list: ~
+        new: ~
+  delete: ~
