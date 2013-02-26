@@ -38,7 +38,7 @@ class Etape
     /**
      * @var boolean
      *
-     * @ORM\Column(name="final", type="boolean", nullable=true)
+     * @ORM\Column(name="finale", type="boolean", nullable=true)
      */
     private $finale;
 
@@ -173,5 +173,8 @@ class Etape
     public function getFinale()
     {
         return $this->finale;
+    }
+    public function __toString(){
+      return $this->getNom();
     }
 }

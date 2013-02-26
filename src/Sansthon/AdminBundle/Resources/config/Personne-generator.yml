@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Liste des Personnes
-      display: ~
+      display: [prenom, nom ]
       actions:
         new: ~
       object_actions:
@@ -21,21 +21,21 @@ builders:
   new:
     params:
       title: Ajouter une Personne
-      display: ~
+      display: [prenom, nom , adresse, telephone]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
-      display: ~
+      display: [prenom, nom , adresse, telephone]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
-      display: ~
+      display: [prenom, nom , adresse, telephone]
       actions:
         list: ~
         new: ~

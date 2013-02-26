@@ -38,7 +38,7 @@ class Etape
     /**
      * @var boolean
      *
-     * @ORM\Column(name="final", type="boolean", nullable=true)
+     * @ORM\Column(name="finale", type="boolean", nullable=true)
      */
     private $finale;
 
@@ -150,5 +150,28 @@ class Etape
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * Set finale
+     *
+     * @param boolean $finale
+     * @return Etape
+     */
+    public function setFinale($finale)
+    {
+        $this->finale = $finale;
+
+        return $this;
+    }
+
+    /**
+     * Get finale
+     *
+     * @return boolean 
+     */
+    public function getFinale()
+    {
+        return $this->finale;
     }
 }

@@ -1,3 +1,43 @@
+SansthonAdminBundle_admin_sansthon_admin_bundle_Stock:
+    resource: "@SansthonAdminBundle/Controller/Stock/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/stock
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Role:
+    resource: "@SansthonAdminBundle/Controller/Role/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/role
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Perte:
+    resource: "@SansthonAdminBundle/Controller/Perte/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/perte
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Personne:
+    resource: "@SansthonAdminBundle/Controller/Personne/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/personne
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Etapefille:
+    resource: "@SansthonAdminBundle/Controller/Etapefille/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/etapefille
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Etape:
+    resource: "@SansthonAdminBundle/Controller/Etape/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/etape
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Definitionrole:
+    resource: "@SansthonAdminBundle/Controller/Definitionrole/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/definitionrole
+
+SansthonAdminBundle_admin_sansthon_admin_bundle_Attributionrole:
+    resource: "@SansthonAdminBundle/Controller/Attributionrole/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/attributionrole
+
 SansthonAdminBundle_admin_sansthon_admin_bundle_type:
     resource: "@SansthonAdminBundle/Controller/Type/"
     type:     admingenerator

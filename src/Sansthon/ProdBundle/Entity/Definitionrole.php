@@ -98,4 +98,7 @@ class Definitionrole
     {
         return $this->role;
     }
+    public function __toString(){
+      return $this->getRole().">".$this->getEtape();
+    }
 }

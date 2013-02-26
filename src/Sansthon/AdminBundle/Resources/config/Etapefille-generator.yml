@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Liste des Chemin
-      display: ~
+      display: [fille, mere]
       actions:
         new: ~
       object_actions:
@@ -17,25 +17,25 @@ builders:
         delete: ~
   filters:
     params:
-      display: ~
+      display: [fille, mere]
   new:
     params:
       title: Nouveau chemin
-      display: ~
+      display: [fille, mere]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Modification du chemin \"%object%\"|{ %object%: Etapefille.id }|"
-      display: ~
+      display: [fille, mere]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "description du chemin \"%object%\"|{ %object%: Etapefille.id }|"
-      display: ~
+      display: [fille, mere]
       actions:
         list: ~
         new: ~

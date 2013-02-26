@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Etat des Stocks
-      display: ~
+      display: [type,etape,value]
       actions:
         new: ~
       object_actions:
@@ -17,25 +17,25 @@ builders:
         delete: ~
   filters:
     params:
-      display: ~
+      display: [type,etape]
   new:
     params:
       title: Ajouter un Stock
-      display: ~
+      display: [type,etape,value]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Modifcation du stock de \"%object%\" a l'etape %etape%|{ %object%: Stock.type, %etape% : Stock.etape }|"
-      display: ~
+      display: [type,etape,value]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description du Stock de  \"%object%\" a l'etape %etape% |{ %object%: Stock.type, %etape% : Stock.etape }|"
-      display: ~
+      display: [type,etape,value]
       actions:
         list: ~
         new: ~

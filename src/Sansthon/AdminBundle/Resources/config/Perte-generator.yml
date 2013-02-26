@@ -9,33 +9,33 @@ builders:
   list:
     params:
       title: List des Pertes
-      display: ~
-      actions:
-        new: ~
+      display: [type,quantite,date,personne,etape]
+      #actions:
+       # new: ~
       object_actions:
         edit: ~
         delete: ~
   filters:
     params:
-      display: ~
+      display: [type,quantite,date,personne,etape]
   new:
     params:
       title: Création d'une pertes
-      display: [id]
+      display: [type,quantite,date,personne,etape,commentaire]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Modification de la pertes \"%object%\"|{ %object%: Perte.id }|"
-      display: ~
+      display: [type,quantite,date,personne,etape,commentaire]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description de la perte \"%object%\"|{ %object%: Perte.id }|"
-      display: ~
+      display: [type,quantite,date,personne,etape,commentaire]
       actions:
         list: ~
         new: ~

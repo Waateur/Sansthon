@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Liste des Etapes
-      display: ~
+      display: [nom]
       actions:
         new: ~
       object_actions:
@@ -21,21 +21,21 @@ builders:
   new:
     params:
       title: Nouvelle Etape
-      display: ~
+      display: [nom,initiale,finale,order]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Edition de l'Etape \"%object%\"|{ %object%: Etape.nom }|"
-      display: ~
+      display: [nom,finale,order]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description de l'Etape  \"%object%\"|{ %object%: Etape.nom }|"
-      display: ~
+      display: [nom,finale,order]
       actions:
         list: ~
         new: ~

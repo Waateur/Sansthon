@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Attribution des rôles
-      display: ~
+      display:  [id,role,personne]
       actions:
         new: ~
       object_actions:
@@ -17,25 +17,25 @@ builders:
         delete: ~
   filters:
     params:
-      display: ~
+      display: [id,role,personne]
   new:
     params:
       title: Nouvelle Attribution
-      display: ~
+      display: [role,personne]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Vous modifier l'attribution  \"%object%\"|{ %object%: Attributionrole.id }|"
-      display: ~
+      display: [role,personne]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description de l'attribution  \"%object%\"|{ %object%: Attributionrole.id }|"
-      display: ~
+      display: [id,role,personne]
       actions:
         list: ~
         new: ~

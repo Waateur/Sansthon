@@ -9,7 +9,7 @@ builders:
   list:
     params:
       title: Liste des Roles
-      display: ~
+      display: [nom,commentaire]
       actions:
         new: ~
       object_actions:
@@ -21,21 +21,21 @@ builders:
   new:
     params:
       title: Ajouter un nouveau Roles
-      display: ~
+      display: [nom,commentaire]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Edition du Role \"%object%\"|{ %object%: Role.id }|"
-      display: ~
+      display: [nom,commentaire]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description du Role \"%object%\"|{ %object%: Role.id }|"
-      display: ~
+      display: [nom,commentaire]
       actions:
         list: ~
         new: ~
