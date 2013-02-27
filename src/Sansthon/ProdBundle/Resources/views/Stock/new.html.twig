@@ -1,8 +1,9 @@
 {% extends 'SansthonProdBundle::layout.html.twig' %}
 
 {% block body -%}
+  <header>
     <h1>Stock creation</h1>
-
+  </header>
     <form action="{{ path('stock_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>

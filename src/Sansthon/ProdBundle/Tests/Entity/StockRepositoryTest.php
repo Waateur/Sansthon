@@ -34,6 +34,11 @@ class StockRepositoryFunctionalTest extends WebTestCase
         */
         $this->assertEquals(true,true);
     }
+    public function testGetByEtapeType($etapeid,$typeid){
+    
+       $this->em;
+       $this->assertEquals(true,true);
+    }
 
     /**
      * {@inheritDoc}

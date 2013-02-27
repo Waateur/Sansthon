@@ -1,13 +1,16 @@
 /*body {
 	padding-top: 80px;
-}*/
+}*
 #sf_admin_content {
 	float:left;
 }
 .container-fluid > .content {
 	margin-left:3%;
 }
-
+*/
+body { 
+    padding-top: 65px; 
+}
 tbody > tr.hover {
   border: 3px solid rgba(82, 168, 236, 0.8);
 }

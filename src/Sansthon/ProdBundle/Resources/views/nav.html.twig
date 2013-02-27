@@ -1,10 +1,19 @@
-<div class="navbar">
-    <div class="navbar-inner">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#">SansThon</a>
-            <ul class="nav">
-                <li><a href="/frontend_dev.php/etat/etatByEtape">Classé par Etape</a></li>
-            </ul>
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          {% block logo %}
+            <a class="brand" href="#">Sansthon Prod</a>
+          {% endblock %}
+          <div class="nav-collapse collapse">
+            {% block menu %}
+              {{ knp_menu_render('SansthonProdBundle:ProdMenuBuilder:mainMenu') }}
+            {% endblock %}
+          </div><!--/.nav-collapse -->
         </div>
-     </div>
-</div>
+      </div>
+    </div>

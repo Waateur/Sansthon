@@ -1,3 +1,4 @@
+<div class="row-fluid">
 {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-block">
         {{ flashMessage }}
@@ -13,4 +14,4 @@
         {{ flashMessage }}
     </div>
 {% endfor %}
-
+<div>

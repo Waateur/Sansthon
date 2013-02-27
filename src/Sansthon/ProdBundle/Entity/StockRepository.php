@@ -12,4 +12,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class StockRepository extends EntityRepository
 {
+  public function getByEtapeType($etapeId,$typeId){
+
+
+    return true;
+  }
 }

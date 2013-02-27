@@ -8,9 +8,8 @@ params:
 builders:
   list:
     params:
-      title: List for AdminBundle
-      display:
-        None: [id]
+      title: Listes des Références
+      display: [id,nom,reference]
       actions:
         new: ~
       object_actions:
@@ -21,25 +20,23 @@ builders:
       display: ~
   new:
     params:
-      title: New object for AdminBundle
+      title: Nouvelle Référence
       display:
-        None: [id]
+        None: [nom,reference,objectif,commentaire]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "You're editing the object \"%object%\"|{ %object%: Type.reference }|"
-      display: 
-        NONE: [id]
+      display: [nom,reference,objectif,commentaire]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "You're viewing the object \"%object%\"|{ %object%: Type.reference }|"
-      display:
-        NONE: [id]
+      display: ~
       actions:
         list: ~
         new: ~
