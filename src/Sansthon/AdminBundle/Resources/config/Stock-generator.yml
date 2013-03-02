@@ -27,14 +27,14 @@ builders:
         list: ~
   edit:
     params:
-      title: "Modifcation du stock de \"%object%\" a l'etape %etape%|{ %object%: Stock.type, %etape% : Stock.etape }|"
+      title: "Modifcation du stock de "
       display: [type,etape,value]
       actions:
         save: ~
         list: ~
   show:
     params:
-      title: "Description du Stock de  \"%object%\" a l'etape %etape% |{ %object%: Stock.type, %etape% : Stock.etape }|"
+      title: "Description du Stock de "
       display: [type,etape,value]
       actions:
         list: ~

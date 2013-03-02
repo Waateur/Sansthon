@@ -1,0 +1,15 @@
+{% block selectform -%}
+<div class="selectform">
+<form action="{{url(path)}}" method="post">
+  <select name="id" onchange="this.form.submit()"  >
+    {% for type in types %}
+      {% if current and type.id == current.id %}
+      <option selected="true" value="{{ type.id }}">{{ type.nom }}</option>
+      {% else %}
+      <option value="{{ type.id }}">{{ type.nom }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</form>
+</div>
+{% endblock %}

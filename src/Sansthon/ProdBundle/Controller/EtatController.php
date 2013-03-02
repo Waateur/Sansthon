@@ -23,11 +23,10 @@ class EtatController extends Controller
    * Show Entity filter by a type.
    *
    * @Route("/bytype", name="etat_by_type")
-   * @Method("GET")
    * @Template("SansthonProdBundle:Etat:bytype.html.twig")
    */
   public function byTypeAction(Request $request){
-    $id=$request->query->get('id');
+    $id=$request->request->get('id');
     $typeList= $this->getDoctrine()
       ->getRepository('SansthonProdBundle:Type')
       ->findAll();
@@ -37,6 +36,7 @@ class EtatController extends Controller
           'types' => $typeList,
           'type' => null,
           'etatList' => null,
+          'stocks' =>array(),
           );
     }
     $currentType= $this->getDoctrine()
