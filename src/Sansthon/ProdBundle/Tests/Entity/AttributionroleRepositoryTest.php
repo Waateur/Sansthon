@@ -19,8 +19,7 @@ class AttributionroleRepositoryFunctionalTest extends WebTestCase
         static::$kernel->boot();
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')
-            ->getEntityManager()
-        ;
+            ->getEntityManager();
     }
 
     public function testSearchByCategoryName()

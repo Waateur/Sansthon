@@ -98,4 +98,7 @@ class Etapefille
     {
         return $this->mere;
     }
+    public function __toString(){
+      return $this->getMere().">".$this->getFille();
+    }
 }

@@ -98,4 +98,7 @@ class Attributionrole
     {
         return $this->role;
     }
+    public function __toString(){
+      return $this->getRole().">".$this->getPersonne();
+    }
 }

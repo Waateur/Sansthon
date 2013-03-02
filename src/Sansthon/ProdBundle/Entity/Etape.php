@@ -3,7 +3,7 @@
 namespace Sansthon\ProdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Etape
  *
@@ -47,9 +47,30 @@ class Etape
      *
      * @ORM\Column(name="display_order", type="integer", nullable=true)
      */
-    private $order;
+    private $displayorder;
 
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Etape", mappedBy="sorties")
+     **/
+    private $entrees;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Etape", inversedBy="entrees")
+     * @ORM\JoinTable(name="chemin",
+     *      joinColumns={@ORM\JoinColumn(name="entree_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="sortie_id", referencedColumnName="id")}
+     *      )
+     **/
+     private $sorties;
+    /*
+    * constructeur
+    *
+    */
+    public function __construct()
+    {
+        $this->filles = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -130,29 +151,6 @@ class Etape
     }
 
     /**
-     * Set order
-     *
-     * @param integer $order
-     * @return Etape
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    
-        return $this;
-    }
-
-    /**
-     * Get order
-     *
-     * @return integer 
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * Set finale
      *
      * @param boolean $finale
@@ -176,5 +174,170 @@ class Etape
     }
     public function __toString(){
       return $this->getNom();
+    }
+
+    /**
+     * Set displayorder
+     *
+     * @param integer $displayorder
+     * @return Etape
+     */
+    public function setDisplayorder($displayorder)
+    {
+        $this->displayorder = $displayorder;
+
+        return $this;
+    }
+
+    /**
+     * Get displayorder
+     *
+     * @return integer 
+     */
+    public function getDisplayorder()
+    {
+        return $this->displayorder;
+    }
+
+    /**
+     * Add filles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $filles
+     * @return Etape
+     */
+    public function addFille(\Sansthon\ProdBundle\Entity\Etape $filles)
+    {
+        $this->filles[] = $filles;
+
+        return $this;
+    }
+
+    /**
+     * Remove filles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $filles
+     */
+    public function removeFille(\Sansthon\ProdBundle\Entity\Etape $filles)
+    {
+        $this->filles->removeElement($filles);
+    }
+
+    /**
+     * Get filles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFilles()
+    {
+        return $this->filles;
+    }
+
+    /**
+     * Add entree
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $entree
+     * @return Etape
+     */
+    public function addEntree(\Sansthon\ProdBundle\Entity\Etape $entree)
+    {
+        $this->entree[] = $entree;
+
+        return $this;
+    }
+
+    /**
+     * Remove entree
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $entree
+     */
+    public function removeEntree(\Sansthon\ProdBundle\Entity\Etape $entree)
+    {
+        $this->entree->removeElement($entree);
+    }
+
+    /**
+     * Get entree
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEntree()
+    {
+        return $this->entree;
+    }
+
+    /**
+     * Add sortie
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $sortie
+     * @return Etape
+     */
+    public function addSortie(\Sansthon\ProdBundle\Entity\Etape $sortie)
+    {
+        $this->sortie[] = $sortie;
+
+        return $this;
+    }
+
+    /**
+     * Remove sortie
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $sortie
+     */
+    public function removeSortie(\Sansthon\ProdBundle\Entity\Etape $sortie)
+    {
+        $this->sortie->removeElement($sortie);
+    }
+
+    /**
+     * Get sortie
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * Get entrees
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEntrees()
+    {
+        return $this->entrees;
+    }
+
+    /**
+     * Add sorties
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $sorties
+     * @return Etape
+     */
+    public function addSorty(\Sansthon\ProdBundle\Entity\Etape $sorties)
+    {
+        $this->sorties[] = $sorties;
+
+        return $this;
+    }
+
+    /**
+     * Remove sorties
+     *
+     * @param \Sansthon\ProdBundle\Entity\Etape $sorties
+     */
+    public function removeSorty(\Sansthon\ProdBundle\Entity\Etape $sorties)
+    {
+        $this->sorties->removeElement($sorties);
+    }
+
+    /**
+     * Get sorties
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
     }
 }

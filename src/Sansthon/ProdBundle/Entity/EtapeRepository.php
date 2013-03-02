@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class EtapeRepository extends EntityRepository
 {
+  public function findAllOrderedByDisplayorder()
+  {
+    return $this->getEntityManager()
+      ->createQuery('SELECT e FROM SansthonProdBundle:Etape e ORDER BY e.displayorder ASC')
+      ->getResult();
+  }
 }

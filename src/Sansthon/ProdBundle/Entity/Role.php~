@@ -92,4 +92,7 @@ class Role
     {
         return $this->commentaire;
     }
+    public function __toString(){
+      return $this->getNom();
+    }
 }

@@ -14,3 +14,11 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        host:     localhost
+        dbname:   sansthon
+        path: /home/darksurfer/Prog/Sansthon2/app/cache/test/database.sqlite
+        charset:  UTF8
+

@@ -18,11 +18,6 @@ SansthonAdminBundle_admin_sansthon_admin_bundle_Personne:
     type:     admingenerator
     prefix:   /admin/sansthon_admin_bundle/personne
 
-SansthonAdminBundle_admin_sansthon_admin_bundle_Etapefille:
-    resource: "@SansthonAdminBundle/Controller/Etapefille/"
-    type:     admingenerator
-    prefix:   /admin/sansthon_admin_bundle/etapefille
-
 SansthonAdminBundle_admin_sansthon_admin_bundle_Etape:
     resource: "@SansthonAdminBundle/Controller/Etape/"
     type:     admingenerator

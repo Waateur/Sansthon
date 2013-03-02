@@ -152,4 +152,7 @@ class Personne
     {
         return $this->telephone;
     }
+    public function __toString(){
+      return $this->getPrenom()." ".$this->getNom();
+    }
 }

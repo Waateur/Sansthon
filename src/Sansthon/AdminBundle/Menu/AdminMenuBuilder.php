@@ -27,7 +27,7 @@ class AdminMenuBuilder extends AdmingeneratorMenuBuilder {
 
     $etapemenu =$this->addDropdownMenu($menu,'Etape');
     $this->addNavLinkRoute($etapemenu,'Creation des étapes','Sansthon_AdminBundle_Etape_list');
-    $this->addNavLinkRoute($etapemenu,'Creation des chemins','Sansthon_AdminBundle_Etapefille_list');
+    /*$this->addNavLinkRoute($etapemenu,'Creation des chemins','Sansthon_AdminBundle_Etapefille_list');*/
 
     $produitmenu =$this->addDropdownMenu($menu,'Production');
     $this->addNavLinkRoute($produitmenu,'Gestions des références','Sansthon_AdminBundle_Type_list');

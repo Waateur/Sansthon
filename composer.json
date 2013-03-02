@@ -20,7 +20,9 @@
         "jms/di-extra-bundle": "1.3.*",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "cedriclombardot/admingenerator-generator-bundle": "2.2.*@dev",
-        "friendsofsymfony/user-bundle": "*"
+        "friendsofsymfony/user-bundle": "*",
+        "phpunit/phpunit": "*",
+        "phpunit/php-timer": "1.0.4"
     },
     "scripts": {
         "post-install-cmd": [

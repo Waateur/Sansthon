@@ -46,7 +46,7 @@ class Stock
      *   @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      * })
      */
-    public $type;
+    protected $type;
 
 
     /**
