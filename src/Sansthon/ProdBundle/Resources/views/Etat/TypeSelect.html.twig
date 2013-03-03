@@ -2,6 +2,7 @@
 <div class="selectform">
 <form action="{{url(path)}}" method="get">
   <select name="id" onchange="this.form.submit()"  >
+    <option></option>
     {% for type in types %}
       {% if current and type.id == current.id %}
       <option selected="true" value="{{ type.id }}">{{ type.nom }}</option>

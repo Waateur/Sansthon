@@ -359,4 +359,14 @@ class Etat
       $this->setDebut(new \Datetime("now"));
       $this->stocked=false;
     }
+    /*
+    *
+    * Finish this etat
+    *
+    */
+    public function finish($stocked=true){
+      $this->setFin(new \Datetime());
+      $this->setStocked($stocked);
+      return $this;
+    }
 }

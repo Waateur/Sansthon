@@ -9,7 +9,7 @@
  {% for stock in stocks %}
    <div class="stockblock well span2">
     <header>{{stock.etape}}</header>
-    <section class="stockvalue"> {{stock.value}} </section>
+    <section id="stock{{stock.etape.id}}" class="stockvalue"> {{stock.value}} </section>
     <div class="row-fluid btn-group">
     {% if stock.etape.initiale %}
         <a href="#{{stock.etape}}NouveauModal" role="button" class="btn btn-success btn-mini" data-toggle="modal">Nouveau</a>
@@ -40,13 +40,14 @@
         <tbody>
        {% if etatList %}
         {% for entity in etatList %}
-          <form action="" method="post" >
+          <form action="{{path('etat_valide')}}" method="post" >
             <tr>
                 <td >
                     <div class="btn-group"> 
                         <a href="{{ path('etat_show', { 'id': entity.id }) }}" class="btn btn-info">{{ entity.id }}</a>
                         <a href="{{path('etat_cancel',{'id': entity.id})}}" class="btn btn-primary">Annuler </a>
-                        <a class="btn btn-primary">Diviser</a> 
+                        <a href="{{path('etat_toperte',{'id':entity.id})}}" class="btn btn-danger">Perte</a>
+                        <!--<a class="btn btn-primary">Diviser</a> -->
                     </div>
                 </td>
                 <td>{{entity.type.reference}} {{entity.type.nom}} </td>
@@ -54,6 +55,7 @@
                 <td>{{ entity.etape }}</td>
                 <td>
                 <select name="personne" class="input-small">
+                    <option></option>
                      {% for role  in entity.etape.roles %}
                         {% for personne  in role.personnes %}
                          {% if entity.personne %}
@@ -77,9 +79,13 @@
                     </span> 
                   </span>
                 </td>
-                <td> <div class="btn-group"><button on-click="enregistrer();" class="btn btn-primary enregistrer">Enregistré</button>  <a class="btn btn-danger"> Perte </a> <button type="submit" class="btn btn-success">Valider</button> </div>
+                <td> 
+                  <div class="btn-group">
+                     <button type="submit" class="btn btn-success">Valider</button>
+                 </div>
                 </td>
             </tr>
+          <input type="hidden" name="id" value="{{entity.id}}" />
           </form>
         {% endfor %}
         {% endif %}
@@ -108,6 +114,7 @@
                     <input type="text" name="prevue" value="" class="dateform" /><span class="add-on"><i class="icon-calendar"></i></span>
                     <label for="personne"> Attribuer à </label>
                     <select name="personne">
+                      <option></option>
                      {% for role  in chemin.roles %}
                         {% for personne  in role.personnes %}
                           <option value="{{personne.id}}">{{personne}}</option>
@@ -143,6 +150,7 @@
                     <input type="text" name="prevue" value="" class="dateform" /><span class="add-on"><i class="icon-calendar"></i></span>
                     <label for="personne"> Attribuer à </label>
                     <select name="personne">
+                     <option></option>
                      {% for role  in stock.etape.roles %}
                         {% for personne  in role.personnes %}
                           <option value="{{personne.id}}">{{personne}}</option>

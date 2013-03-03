@@ -12,6 +12,7 @@ use Sansthon\ProdBundle\Entity\Stock;
  */
 class StockRepository extends EntityRepository
 {
+
   public function getByEtapeAndType($etape,$type){
     $stock= $this->findOneBy(
       array('etape' => $etape, 'type' => $type)
@@ -25,6 +26,10 @@ class StockRepository extends EntityRepository
       $this->_em->flush();
     }
     return $stock;
+  }
+  
+  public function getByEtat($etat){
+    return $this->getByEtapeAndType($etat->getEtape(),$etat->getType());
   }
   public function getByType($type){
     $stocks =$this->findBy(array('type' =>$type));

@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sansthon\ProdBundle\Entity\Etat;
 use Sansthon\ProdBundle\Form\EtatType;
-
+use Symfony\Component\HttpFoundation\Response;
 /**
  * Etat controller.
  *
@@ -17,6 +17,80 @@ use Sansthon\ProdBundle\Form\EtatType;
  */
 class EtatController extends Controller
 {
+  /**
+  *
+  * Make an etat To Perte
+  *
+  *@Route("/toperte/{id}",name="etat_toperte")
+  *@Method("GET")
+  */
+  public function toperteAction(Request $request,$id){
+    $etat = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etat')
+      ->find($id);
+    $perte = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Perte')
+      ->createPerteFromEtat($etat);
+    $this->getDoctrine()->getManager()->flush();
+    $this->get('session')->getFlashBag()->add('success', "Perte créer de ".$perte->getQuantite()." ".$perte->getType()." ".$perte->getType()->getNom()." à partire de l'en cours n° ".$etat->getId() );
+
+    return $this->redirect($this->getRequest()->headers->get("referer"));
+  }
+  
+  /**
+   *Valid and finish and Etat
+   * 
+   *@Route("/valide", name="etat_valide")
+   *@Method("POST")
+   */
+  public function valideAction(Request $request)
+  { 
+    // Get All Needed Params
+    $id = $request->request->get("id");
+    $quantite = $request->request->get("quantite");
+    $personne =  $this->getDoctrine()
+      ->getRepository("SansthonProdBundle:Personne")->find($request->request->get("personne"));
+    $prevue = $request->request->get("prevue");
+    // new instance of needed object
+    $etat = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etat')
+      ->find($id);
+    if(!$etat) {
+      throw $this->createNotFoundException('Etat was not found');
+    }
+    // processing
+    $etat->setPersonne($personne);
+    $etat->setPrevue(new \Datetime($prevue));
+    $dif=$quantite - $etat->getQuantite();
+    $etat->setQuantite($quantite);
+    if($dif < 0) {
+      $perte = $this->getDoctrine()
+        ->getRepository("SansthonProdBundle:Perte")
+        ->createPerteByArray(array(
+              "personne" => $personne,
+              "quantite" => abs($dif),
+              "type" => $etat->getType(),
+              "etape" => $etat->getEtape()
+              ));
+      $this->get('session')->getFlashBag()->add('notice', "perte de ".$perte->getQuantite()." créer");
+
+    }elseif ($dif > 0) {
+      if($etat->getEtapeorigine()){
+        $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
+        $stock->addValue($dif);
+        $this->get('session')->getFlashBag()->add('notice', "stock de ".$etat->getEtapeorigine()." décrémenter de ".$dif);
+      }
+    }
+    $etat->setFin(new \Datetime());
+    $etat->setStocked(true);
+    $perte = $this->getDoctrine()
+      ->getRepository("SansthonProdBundle:Stock")
+      ->getByEtapeAndType($etat->getEtape(),$etat->getType())
+      ->addValue($etat->getQuantite());
+    $this->getDoctrine()->getManager()->flush();
+    $this->get('session')->getFlashBag()->add('success', "etat ".$etat->getId()." Validé ".$etat->getEtape()->getNom()." incrémenté de ".$etat->getQuantite());
+    return $this->redirect($this->getRequest()->headers->get("referer"));
+  }
 
   /**
    * add a Etat new attributed and etape linked entity.
@@ -92,7 +166,7 @@ class EtatController extends Controller
       ->getRepository('SansthonProdBundle:Etat');
     $etat =$repo->find($id);
     $this->get('session')->getFlashBag()->add('notice', 'Etat N°'.$etat->getId()." annulé.".$etat->getEtape()." de ".$etat->getType().' '.$etat->getType()->getNom().' incrémenté de '.$etat->getQuantite()."."  ); 
-    
+
     $repo->cancel($id);
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
