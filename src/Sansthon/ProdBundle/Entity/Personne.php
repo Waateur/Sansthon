@@ -3,6 +3,7 @@
 namespace Sansthon\ProdBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Personne
@@ -49,7 +50,14 @@ class Personne
      */
     private $telephone;
 
+/**
+     * @ORM\ManyToMany(targetEntity="Role", mappedBy="personnes")
+     */
+    private $roles;
 
+    public function __construct() {
+        $this->roles = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -154,5 +162,38 @@ class Personne
     }
     public function __toString(){
       return $this->getPrenom()." ".$this->getNom();
+    }
+
+    /**
+     * Add roles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Role $roles
+     * @return Personne
+     */
+    public function addRole(\Sansthon\ProdBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Role $roles
+     */
+    public function removeRole(\Sansthon\ProdBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }

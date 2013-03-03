@@ -21,21 +21,21 @@ builders:
   new:
     params:
       title: Ajouter un nouveau Roles
-      display: [nom,commentaire]
+      display: [nom,commentaire,personnes,etapes]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Edition du Role \"%object%\"|{ %object%: Role.id }|"
-      display: [nom,commentaire]
+      display: [nom,commentaire,personnes,etapes]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Description du Role \"%object%\"|{ %object%: Role.id }|"
-      display: [nom,commentaire]
+      display: [nom,commentaire,personnes,etapes]
       actions:
         list: ~
         new: ~

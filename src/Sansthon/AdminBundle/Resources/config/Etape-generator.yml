@@ -21,14 +21,14 @@ builders:
   new:
     params:
       title: Nouvelle Etape
-      display: [nom,initiale,finale,displayorder,entrees,sorties]
+      display: [nom,initiale,finale,displayorder,sorties]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Edition de l'Etape \"%object%\"|{ %object%: Etape.nom }|"
-      display: [nom,finale,displayorder,entrees,sorties]
+      display: [nom,finale,displayorder,sorties]
       actions:
         save: ~
         list: ~

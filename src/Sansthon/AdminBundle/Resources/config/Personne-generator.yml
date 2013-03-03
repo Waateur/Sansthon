@@ -21,21 +21,21 @@ builders:
   new:
     params:
       title: Ajouter une Personne
-      display: [prenom, nom , adresse, telephone]
+      display: [prenom, nom , adresse, telephone,roles]
       actions:
         save: ~
         list: ~
   edit:
     params:
       title: "Modification des information concernant : \"%object%\"|{ %object%: Personne.nom }|"
-      display: [prenom, nom , adresse, telephone]
+      display: [prenom, nom , adresse, telephone,roles]
       actions:
         save: ~
         list: ~
   show:
     params:
       title: "Information concernant : \"%object%\"|{ %object%: Personne.nom }|"
-      display: [prenom, nom , adresse, telephone]
+      display: [prenom, nom , adresse, telephone,roles]
       actions:
         list: ~
         new: ~

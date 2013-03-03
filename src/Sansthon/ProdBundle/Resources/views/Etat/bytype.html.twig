@@ -7,14 +7,20 @@
         %}
 <div class="row-fluid">
  {% for stock in stocks %}
-   <div class="stockblock span3">
+   <div class="stockblock well span2">
     <header>{{stock.etape}}</header>
-    <div class="stockValue"> {{stock.value}} </div>
-    <footer class="row-fluid">
+    <section class="stockvalue"> {{stock.value}} </section>
+    <div class="row-fluid btn-group">
+    {% if stock.etape.initiale %}
+        <a href="#{{stock.etape}}NouveauModal" role="button" class="btn btn-success btn-mini" data-toggle="modal">Nouveau</a>
+    {% endif %}
     {% for chemin in stock.etape.sorties %}
-        <div class="span4 btn btform ">{{chemin.nom}} </div>
+        {% if loop.index is divisibleby(3) %}
+        </div> <div class= "row-fluid btn-group ">
+        {% endif %}
+        <a href="#{{stock.etape}}{{chemin.nom}}Modal" role="button" class="btn btn-primary btn-mini" data-toggle="modal">{{chemin.nom}}</a>
     {% endfor %}
-    </footer>
+    </div>
   </div>
  {% endfor %}
 </div>
@@ -34,52 +40,124 @@
         <tbody>
        {% if etatList %}
         {% for entity in etatList %}
+          <form action="" method="post" >
             <tr>
-                <td><a href="{{ path('etat_show', { 'id': entity.id }) }}" class="btn">{{ entity.id }}</a></td>
+                <td >
+                    <div class="btn-group"> 
+                        <a href="{{ path('etat_show', { 'id': entity.id }) }}" class="btn btn-info">{{ entity.id }}</a>
+                        <a href="{{path('etat_cancel',{'id': entity.id})}}" class="btn btn-primary">Annuler </a>
+                        <a class="btn btn-primary">Diviser</a> 
+                    </div>
+                </td>
                 <td>{{entity.type.reference}} {{entity.type.nom}} </td>
-                <td>{{ entity.quantite }}</td>
+                <td><input type="number" name="quantite" class="input-small" value="{{ entity.quantite }}"></input></td>
                 <td>{{ entity.etape }}</td>
-                <td>{% if entity.personne %}{{entity.personne.nom }}{% endif %} </td>
-                <td>{{ entity.prevue }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('etat_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('etat_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <select name="personne" class="input-small">
+                     {% for role  in entity.etape.roles %}
+                        {% for personne  in role.personnes %}
+                         {% if entity.personne %}
+                          {% if personne.id and entity.personne.id == personne.id %}
+                             <option selected="true" value="{{personne.id}}">{{personne}}</option>
+                              {%else %}
+                             <option value="{{personne.id}}">{{personne}}</option>
+                            {% endif %} 
+                          {% else %}
+                           <option value="{{personne.id}}">{{personne}}</option>
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+                 </select>
+                </td>
+                <td>
+                  <span class="input-append">
+                    <input type="text" name="prevue" value="{{ entity.prevue|date('Y-m-d') }}"  class="dateform input-small" />
+                    <span class="add-on">
+                        <i class="icon-calendar"></i>
+                    </span> 
+                  </span>
+                </td>
+                <td> <div class="btn-group"><button on-click="enregistrer();" class="btn btn-primary enregistrer">Enregistré</button>  <a class="btn btn-danger"> Perte </a> <button type="submit" class="btn btn-success">Valider</button> </div>
                 </td>
             </tr>
+          </form>
         {% endfor %}
         {% endif %}
         </tbody>
     </table>
 
-<a href="#EntreeSortieModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
  
 <!-- Modal -->
-<div id="EntreeSortieModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="EntreeSortie" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Produire</h3>
-  </div>
-  <form action="#" method="post">
-    <fieldset>
-      <div class="modal-body">
-              <div class="input-append input-prepend">
-            <label for="quantite">Quantité</label>
-            <input type="number" name="quantie" id="formquantite" class="number ui-widget-content ui-corner-all" />
-            <label for="date">Date retour prévue</label>
-            <input type="date" name="prevue" id="formprevue" value="" class="date ui-widget-content ui-corner-all" /><span class="add-on"><i class="icon-calendar"></i></span>
+ {% for stock in stocks %}
+    {% for chemin in stock.etape.sorties %}
+        <div id="{{stock.etape}}{{chemin.nom}}Modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>de {{stock.etape}} à {{chemin.nom}}</h3>
           </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-        <button class="btn btn-primary">Valider</button>
-      </div>
-    </fieldset>
-  </form>
-</div>
- {% endblock %}
+          <form action="{{path("etat_add")}}" method="post">
+            <fieldset>
+              <div class="modal-body">
+                    <input type="hidden" name="origin" value="{{stock.id}}"/>
+                    <input type="hidden" name="etape" value="{{chemin.id}}" />  
+                    <input type="hidden" name="type" value="{{type.id}}" /> 
+                    <div class="input-append input-prepend">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" name="quantite" class="number" />
+                    <label for="prevue">Date retour prévue</label>
+                    <input type="text" name="prevue" value="" class="dateform" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    <label for="personne"> Attribuer à </label>
+                    <select name="personne">
+                     {% for role  in chemin.roles %}
+                        {% for personne  in role.personnes %}
+                          <option value="{{personne.id}}">{{personne}}</option>
+                        {% endfor %}
+                      {% endfor %}
+                    </select>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+    {% endfor %}
+    {% if stock.etape.initiale %}
+       <div id="{{stock.etape}}NouveauModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Nouveau à {{stock.etape}} </h3>
+          </div>
+          <form action="{{path("etat_add")}}" method="post">
+            <fieldset>
+              <div class="modal-body">
+                    <input type="hidden" name="origin" value=""/>
+                    <input type="hidden" name="etape" value="{{stock.etape.id}}" />  
+                    <input type="hidden" name="type" value="{{type.id}}" /> 
+                    <div class="input-append input-prepend">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" name="quantite" class="number" />
+                    <label for="prevue">Date retour prévue</label>
+                    <input type="text" name="prevue" value="" class="dateform" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    <label for="personne"> Attribuer à </label>
+                    <select name="personne">
+                     {% for role  in stock.etape.roles %}
+                        {% for personne  in role.personnes %}
+                          <option value="{{personne.id}}">{{personne}}</option>
+                        {% endfor %}
+                      {% endfor %}
+                    </select>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

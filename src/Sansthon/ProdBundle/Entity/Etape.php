@@ -63,13 +63,23 @@ class Etape
      *      )
      **/
      private $sorties;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Role", mappedBy="etapes")
+     */
+    private $roles;
+
+
+
     /*
     * constructeur
     *
     */
     public function __construct()
     {
-        $this->filles = new ArrayCollection();
+        $this->entrees = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
     /**
      * Get id
@@ -198,41 +208,7 @@ class Etape
     {
         return $this->displayorder;
     }
-
-    /**
-     * Add filles
-     *
-     * @param \Sansthon\ProdBundle\Entity\Etape $filles
-     * @return Etape
-     */
-    public function addFille(\Sansthon\ProdBundle\Entity\Etape $filles)
-    {
-        $this->filles[] = $filles;
-
-        return $this;
-    }
-
-    /**
-     * Remove filles
-     *
-     * @param \Sansthon\ProdBundle\Entity\Etape $filles
-     */
-    public function removeFille(\Sansthon\ProdBundle\Entity\Etape $filles)
-    {
-        $this->filles->removeElement($filles);
-    }
-
-    /**
-     * Get filles
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFilles()
-    {
-        return $this->filles;
-    }
-
-    /**
+     /**
      * Add entree
      *
      * @param \Sansthon\ProdBundle\Entity\Etape $entree
@@ -339,5 +315,38 @@ class Etape
     public function getSorties()
     {
         return $this->sorties;
+    }
+
+    /**
+     * Add roles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Role $roles
+     * @return Etape
+     */
+    public function addRole(\Sansthon\ProdBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \Sansthon\ProdBundle\Entity\Role $roles
+     */
+    public function removeRole(\Sansthon\ProdBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }

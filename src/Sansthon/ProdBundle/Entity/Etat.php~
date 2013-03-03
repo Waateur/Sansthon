@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="etat")
  * @ORM\Entity(repositoryClass="Sansthon\ProdBundle\Entity\EtatRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Etat
 {
@@ -348,5 +349,14 @@ class Etat
     public function getEtapeorigine()
     {
         return $this->etapeorigine;
+    }
+    /**
+    * Preinsert methode
+    * 
+    * @ORM\PrePersist
+    */
+    public function prePersist(){
+      $this->setDebut(new Datetime("now"));
+      $this->stocked=false;
     }
 }

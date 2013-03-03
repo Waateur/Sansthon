@@ -81,6 +81,26 @@ class Stock
     {
         return $this->value;
     }
+     /**
+     * Add to value
+     *
+     * @param integer $value
+     * @return Stock
+     */
+    public function addValue($value){
+        $this->value += $value;
+        return $this;
+    }
+    /**
+     * substract to value
+     *
+     * @param integer $value
+     * @return Stock
+     */
+    public function subValue($value){
+        $this->value -= $value;
+        return $this;
+    }
 
     /**
      * Set etape

@@ -22,8 +22,6 @@ class AdminMenuBuilder extends AdmingeneratorMenuBuilder {
     $rolemenu =$this->addDropdownMenu($menu,'Personnes et Roles');
     $this->addNavLinkRoute($rolemenu,'gestion des Personnes','Sansthon_AdminBundle_Personne_list');
     $this->addNavLinkRoute($rolemenu,'gestion des Roles','Sansthon_AdminBundle_Role_list');
-    $this->addNavLinkRoute($rolemenu,'gestion des attributions','Sansthon_AdminBundle_Attributionrole_list');
-    $this->addNavLinkRoute($rolemenu,'gestion des Roles','Sansthon_AdminBundle_Definitionrole_list');
 
     $etapemenu =$this->addDropdownMenu($menu,'Etape');
     $this->addNavLinkRoute($etapemenu,'Creation des étapes','Sansthon_AdminBundle_Etape_list');

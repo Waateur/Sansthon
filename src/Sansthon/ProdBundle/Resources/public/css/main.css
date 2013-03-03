@@ -1,21 +1,50 @@
 /*body {
-	padding-top: 80px;
-}*
+  padding-top: 80px;
+  }*
 #sf_admin_content {
-	float:left;
+float:left;
 }
 .container-fluid > .content {
-	margin-left:3%;
+margin-left:3%;
 }
-*/
+ */
 body { 
-    padding-top: 65px; 
+  padding-top: 65px; 
 }
 tbody > tr.hover {
-  border: 3px solid rgba(82, 168, 236, 0.8);}
+border: 3px solid rgba(82, 168, 236, 0.8);}
+.modal-body {
+    max-height: 800px;
+    min-height: 300px;
+}
 /***  Stock List Css **/
 .stockblock {
   text-align: center;
-  border-style:solid;
-  border-width:5px;
+  /*border-style:solid;*/
+  /*border-width:1px;*
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  /*background-color: light-grey;*/
+-moz-box-shadow: 10px 10px 10px 0px #656565;
+-webkit-box-shadow: 10px 10px 10px 0px #656565;
+-o-box-shadow: 10px 10px 10px 0px #656565;
+box-shadow: 10px 10px 10px 0px #656565;
+}
+.stockblock header {
+ /* border-bottom: 1px solid;
+ /* background-color: black;*/
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow:2px -1px 2px #333333;
+}
+.stockblock section.stockvalue {
+ /* border-bottom: 1px solid;
+  border-color: black;
+  background-color: white;*/
+  color: blue;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 150%;
 }

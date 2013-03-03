@@ -23,16 +23,6 @@ SansthonAdminBundle_admin_sansthon_admin_bundle_Etape:
     type:     admingenerator
     prefix:   /admin/sansthon_admin_bundle/etape
 
-SansthonAdminBundle_admin_sansthon_admin_bundle_Definitionrole:
-    resource: "@SansthonAdminBundle/Controller/Definitionrole/"
-    type:     admingenerator
-    prefix:   /admin/sansthon_admin_bundle/definitionrole
-
-SansthonAdminBundle_admin_sansthon_admin_bundle_Attributionrole:
-    resource: "@SansthonAdminBundle/Controller/Attributionrole/"
-    type:     admingenerator
-    prefix:   /admin/sansthon_admin_bundle/attributionrole
-
 SansthonAdminBundle_admin_sansthon_admin_bundle_type:
     resource: "@SansthonAdminBundle/Controller/Type/"
     type:     admingenerator

@@ -13,7 +13,7 @@ use Sansthon\ProdBundle\Entity\Stock;
 class StockRepository extends EntityRepository
 {
   public function getByEtapeAndType($etape,$type){
-    $stock= $this->findBy(
+    $stock= $this->findOneBy(
       array('etape' => $etape, 'type' => $type)
     );   
     if(!$stock){

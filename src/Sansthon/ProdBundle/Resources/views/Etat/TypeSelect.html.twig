@@ -1,6 +1,6 @@
 {% block selectform -%}
 <div class="selectform">
-<form action="{{url(path)}}" method="post">
+<form action="{{url(path)}}" method="get">
   <select name="id" onchange="this.form.submit()"  >
     {% for type in types %}
       {% if current and type.id == current.id %}

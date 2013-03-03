@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class EtatRepository extends EntityRepository
 {
+  /***
+   * Cancel current Etat
+   *
+   *
+   *
+   */
+
+  public function cancel($id) {
+    /* onrecupere l'etat*/
+    $etat = $this->find($id);
+
+    if($etat->getEtapeorigine()){
+      $stockorigin= $this->_em->getRepository("SansthonProdBundle:Stock")->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
+      $stockorigin->addValue($etat->getQuantite());
+    }
+
+    /* quantie refaite suppression de l'etat*/
+    $this->_em->remove($etat);
+    $this->_em->flush();
+  }
 }
