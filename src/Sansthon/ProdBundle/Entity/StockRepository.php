@@ -32,7 +32,14 @@ class StockRepository extends EntityRepository
     return $this->getByEtapeAndType($etat->getEtape(),$etat->getType());
   }
   public function getByType($type){
-    $stocks =$this->findBy(array('type' =>$type));
+    $query = $this->_em
+        ->createQuery('
+            SELECT s, e FROM SansthonProdBundle:Stock s
+            JOIN s.etape e
+            WHERE s.type = :id
+            ORDER BY e.displayorder'
+        )->setParameter('id', $type->getId());
+    $stocks =$query->getResult();
     $etapes = $this->_em->getRepository('SansthonProdBundle:Etape')->findAll();
 
     if(count($stocks) != count($etapes)){

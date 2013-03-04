@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class PerteRepository extends EntityRepository
 {
     public function createPerteByArray($array){
-      if(!$array["personne"] or !$array["type"] or !$array["etape"] or !$array["quantite"]){
+      if(!$array["type"] or !$array["etape"] or !$array["quantite"]){
         return null;
       }
       $perte = new Perte();
@@ -23,6 +23,7 @@ class PerteRepository extends EntityRepository
       $perte->setQuantite($array["quantite"]);
       $perte->setCommentaire("casse usuelle ");
       $this->_em->persist($perte);
+      $this->_em->flush();
       return $perte;
     }
 
@@ -34,6 +35,7 @@ class PerteRepository extends EntityRepository
       $perte->setQuantite($etat->getQuantite());
       $this->_em->persist($perte);
       $etat->finish(true);
+      $this->_em->flush();
       return $perte;
     }
 }

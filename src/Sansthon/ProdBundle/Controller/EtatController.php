@@ -64,16 +64,17 @@ class EtatController extends Controller
     $dif=$quantite - $etat->getQuantite();
     $etat->setQuantite($quantite);
     if($dif < 0) {
-      $perte = $this->getDoctrine()
-        ->getRepository("SansthonProdBundle:Perte")
-        ->createPerteByArray(array(
-              "personne" => $personne,
-              "quantite" => abs($dif),
-              "type" => $etat->getType(),
-              "etape" => $etat->getEtape()
-              ));
-      $this->get('session')->getFlashBag()->add('notice', "perte de ".$perte->getQuantite()." créer");
-
+      if(!$etat->getEtape()->getInitiale()){
+          $perte = $this->getDoctrine()
+            ->getRepository("SansthonProdBundle:Perte")
+            ->createPerteByArray(array(
+                  "personne" => $personne,
+                  "quantite" => abs($dif),
+                  "type" => $etat->getType(),
+                  "etape" => $etat->getEtape()
+                  ));
+          $this->get('session')->getFlashBag()->add('notice', "perte de ".$perte->getQuantite()." créer");
+      }
     }elseif ($dif > 0) {
       if($etat->getEtapeorigine()){
         $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
@@ -165,9 +166,8 @@ class EtatController extends Controller
     $repo=$this->getDoctrine()
       ->getRepository('SansthonProdBundle:Etat');
     $etat =$repo->find($id);
-    $this->get('session')->getFlashBag()->add('notice', 'Etat N°'.$etat->getId()." annulé.".$etat->getEtape()." de ".$etat->getType().' '.$etat->getType()->getNom().' incrémenté de '.$etat->getQuantite()."."  ); 
-
     $repo->cancel($id);
+    $this->get('session')->getFlashBag()->add('success'," Annulation N° ".$etat->getId());
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
 

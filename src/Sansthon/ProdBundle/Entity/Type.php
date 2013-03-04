@@ -154,6 +154,6 @@ class Type
     }
 
     public function __toString(){
-      return "".$this->getReference();
+      return $this->getReference()." ".$this->getNom();
     }
 }
