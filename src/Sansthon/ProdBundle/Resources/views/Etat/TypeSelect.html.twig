@@ -5,7 +5,7 @@
     <option></option>
     {% for type in types %}
       {% if current and type.id == current.id %}
-      <option selected="true" value="{{ type.id }}">{{ type.nom }}</option>
+      <option selected="true" value="{{ type.id }}"> {{type.reference}} {{ type.nom }}</option>
       {% else %}
       <option value="{{ type.id }}">{{type.reference}} {{ type.nom }}</option>
       {% endif %}
