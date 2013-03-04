@@ -104,7 +104,7 @@
           <form action="{{path("etat_add")}}" method="post">
             <fieldset>
               <div class="modal-body">
-                    <input type="hidden" name="origin" value="{{stock.id}}"/>
+                    <input type="hidden" name="origin" value="{{stock.etape.id}}"/>
                     <input type="hidden" name="etape" value="{{chemin.id}}" />  
                     <input type="hidden" name="type" value="{{type.id}}" /> 
                     <div class="input-append input-prepend">
