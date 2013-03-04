@@ -27,8 +27,7 @@ class EtatRepository extends EntityRepository
       $stockorigin= $this->_em->getRepository("SansthonProdBundle:Stock")->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
       $stockorigin->addValue($etat->getQuantite());
     }
-    $this->get('session')->getFlashBag()->add('notice', $etat->getEtape()." de ".$etat->getType().' '.$etat->getType()->getNom().' incrémenté de '.$etat->getQuantite()."."  );
-    /* quantie refaite suppression de l'etat*/
+   /* quantie refaite suppression de l'etat*/
     $this->_em->remove($etat);
     $this->_em->flush();
   }

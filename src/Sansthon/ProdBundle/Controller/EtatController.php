@@ -167,7 +167,9 @@ class EtatController extends Controller
       ->getRepository('SansthonProdBundle:Etat');
     $etat =$repo->find($id);
     $repo->cancel($id);
-    $this->get('session')->getFlashBag()->add('success'," Annulation N° ".$etat->getId());
+    $this->get('session')->getFlashBag()->add('success'," Annulation N° ".$id);
+    $this->get('session')->getFlashBag()->add('notice', $etat->getEtape()." de ".$etat->getType().' '.$etat->getType()->getNom().' incrémenté de '.$etat->getQuantite()."."  );
+
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
 
