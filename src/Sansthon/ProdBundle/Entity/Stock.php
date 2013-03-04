@@ -87,8 +87,8 @@ class Stock
      * @param integer $value
      * @return Stock
      */
-    public function addValue($value){
-        $this->value += $value;
+    public function addValue($avalue){
+        $this->setValue($this->getValue() +$avalue);
         return $this;
     }
     /**
@@ -97,8 +97,8 @@ class Stock
      * @param integer $value
      * @return Stock
      */
-    public function subValue($value){
-        $this->value -= $value;
+    public function subValue($svalue){
+        $this->setValue($this->getValue()-$svalue);
         return $this;
     }
 
