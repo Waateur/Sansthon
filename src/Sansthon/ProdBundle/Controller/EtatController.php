@@ -21,7 +21,7 @@ class EtatController extends Controller
   *
   * Make an etat To Perte
   *
-  *@Route("/toperte/{id}",name="etat_toperte")
+  *@Route("/{id}/toperte",name="etat_toperte")
   *@Method("GET")
   */
   public function toperteAction(Request $request,$id){
@@ -32,8 +32,12 @@ class EtatController extends Controller
       ->getRepository('SansthonProdBundle:Perte')
       ->createPerteFromEtat($etat);
     $this->getDoctrine()->getManager()->flush();
-    $this->get('session')->getFlashBag()->add('success', "Perte créer de ".$perte->getQuantite()." ".$perte->getType()." ".$perte->getType()->getNom()." à partire de l'en cours n° ".$etat->getId() );
-
+             $message =  "Création de la perte n°".$perte->getId()." de ".$perte->getQuantite()." ".$perte->getType();
+          if($perte->getPersonne()){
+              $message .= "attribué a ".$perte->getPersonne();
+          }
+              
+          $this->get('session')->getFlashBag()->add('notice',$message);
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
   
@@ -73,7 +77,6 @@ class EtatController extends Controller
                   "type" => $etat->getType(),
                   "etape" => $etat->getEtape()
                   ));
-          $this->get('session')->getFlashBag()->add('notice', "perte de ".$perte->getQuantite()." créer");
       }
     }elseif ($dif > 0) {
       if($etat->getEtapeorigine()){
@@ -145,6 +148,7 @@ class EtatController extends Controller
       ->setEtapeorigine($origin)
       ->setPrevue($prevue)
       ->setEtape($etape)
+      ->setFin(null)
       ->setPersonne($personne)
       ->setQuantite($quantite);
     $em = $this->getDoctrine()->getManager();
@@ -158,7 +162,7 @@ class EtatController extends Controller
   /**
    * Cancel an Etat and Give back quantite to origin
    *
-   *@Route("/cancel/{id}",name="etat_cancel")
+   *@Route("/{id}/cancel",name="etat_cancel")
    *
    *
    */
