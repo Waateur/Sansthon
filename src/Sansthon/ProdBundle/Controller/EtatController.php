@@ -78,7 +78,7 @@ class EtatController extends Controller
     }elseif ($dif > 0) {
       if($etat->getEtapeorigine()){
         $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
-        $stock->addValue($dif);
+        $stock->subValue($dif);
         $this->get('session')->getFlashBag()->add('notice', "stock de ".$etat->getEtapeorigine()." décrémenter de ".$dif);
       }
     }
