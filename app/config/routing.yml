@@ -1,3 +1,8 @@
+SansthonAdminBundle_admin_sansthon_admin_bundle_Etat:
+    resource: "@SansthonAdminBundle/Controller/Etat/"
+    type:     admingenerator
+    prefix:   /admin/sansthon_admin_bundle/Etat
+
 welcome:
     pattern:   /
     defaults:  { _controller: SansthonProdBundle:Etat:byType }

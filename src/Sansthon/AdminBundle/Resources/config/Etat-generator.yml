@@ -1,0 +1,39 @@
+generator: admingenerator.generator.doctrine
+params:
+  model: Sansthon\ProdBundle\Entity\Etat
+  namespace_prefix: Sansthon
+  bundle_name: AdminBundle
+  fields: ~
+
+builders:
+  list:
+    params:
+      title: Liste des Encours
+      display: ~
+      object_actions:
+        edit: ~
+        cancel: ~
+  filters:
+    params:
+      display: ~
+  new:
+    params:
+      title: Création d'un en cours
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  edit:
+    params:
+      title: "Edition de l'en cours \"%object%\"|{ %object%: Etat.id }|"
+      display: ~
+      actions:
+        save: ~
+        list: ~
+  show:
+    params:
+      title: "Details de l'en cours \"%object%\"|{ %object%: Etat.id }|"
+      display: ~
+      actions:
+        list: ~
+        new: ~

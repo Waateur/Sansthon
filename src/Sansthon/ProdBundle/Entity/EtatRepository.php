@@ -19,16 +19,21 @@ class EtatRepository extends EntityRepository
    *
    */
 
-  public function cancel($id) {
+  public function cancel($etat) {
     /* onrecupere l'etat*/
-    $etat = $this->find($id);
-
+    //$etat = $this->find($id);
+    if($etat->getStocked() and $etat->getFin()){
+        $stock= $this->_em->getRepository("SansthonProdBundle:Stock")->getByEtapeAndType($etat->getEtape(),$etat->getType());    
+        $stock->subValue($etat->getQuantite());
+        $etat->setStocked(false)->setFin(null);
+    }else {
     if($etat->getEtapeorigine()){
       $stockorigin= $this->_em->getRepository("SansthonProdBundle:Stock")->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
       $stockorigin->addValue($etat->getQuantite());
     }
    /* quantie refaite suppression de l'etat*/
     $this->_em->remove($etat);
+    }
     $this->_em->flush();
   }
 }

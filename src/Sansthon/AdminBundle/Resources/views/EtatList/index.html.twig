@@ -1,0 +1,14 @@
+{% extends_admingenerated "SansthonAdminBundle:EtatList:index.html.twig" %}
+{% block list_object_actions %}
+<td class="actions">
+
+<a class="" href="{{ path("Sansthon_AdminBundle_Etat_edit", { 'pk': Etat.id }) }}"
+   rel="tooltip" data-original-title="{% trans from "Admingenerator" %}action.object.edit.label{% endtrans %}">
+    <i class="icon-edit"></i></a>
+
+<a class="" href="{{ path("Sansthon_AdminBundle_Etat_cancel", { 'pk': Etat.id }) }}"
+   rel="tooltip" data-original-title="{% trans from "Admingenerator" %}Cancel{% endtrans %}">
+    <i class="icon-backward"></i></a>
+
+</td>
+{% endblock %}

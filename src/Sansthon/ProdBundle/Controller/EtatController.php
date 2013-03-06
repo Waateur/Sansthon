@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sansthon\ProdBundle\Entity\Etat;
+use Sansthon\ProdBundle\Entity\Perte;
 use Sansthon\ProdBundle\Form\EtatType;
 use Symfony\Component\HttpFoundation\Response;
 /**
@@ -82,7 +83,7 @@ class EtatController extends Controller
       if($etat->getEtapeorigine()){
         $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
         $stock->subValue($dif);
-        $this->get('session')->getFlashBag()->add('notice', "stock de ".$etat->getEtapeorigine()." décrémenter de ".$dif);
+        $this->get('session')->getFlashBag()->add('error', "stock de ".$etat->getEtapeorigine()." décrémenter de ".$dif);
       }
     }
     $etat->setFin(new \Datetime());
@@ -158,7 +159,58 @@ class EtatController extends Controller
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
 
+ /**
+   * add a Etat new attributed and etape linked entity.
+   *
+   * @Route("/finalperte", name="etat_final_perte")
+   * @Method("POST")
+   */
+  public function finalPerteAction(Request $request)
+  {
+    /* Verification de l'existance des params indispensable Type Etape Quantite*/
+    $type = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Type')
+      ->find($request->request->get('type'));
+    if(!$type) {
+      throw $this->createNotFoundException('The Type was not found');
+    }
+    $personne= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Personne')
+      ->find($request->request->get('personne'));
 
+    $etape = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etape')
+      ->find($request->request->get('etape'));
+    if(!$etape) {
+      throw $this->createNotFoundException('The etape was not found');
+    }
+
+    $quantite=$request->request->get('quantite');
+    if(!$quantite){
+      throw new \Exception('No quantity given');
+    }
+    $commentaire= $request->request->get('commentaire');
+    
+    /* On préléve la quantite à l'etape d'origine si il y en a une*/
+ 
+      $stockEtape= $this->getDoctrine()
+        ->getRepository('SansthonProdBundle:Stock')
+        ->getByEtapeAndType($etape,$type);
+      $stockEtape->subValue($quantite);
+    $newPerte = new Perte();
+    $newPerte->setType($type)
+      ->setEtape($etape)
+      ->setCommentaire($commentaire)
+      ->setPersonne($personne)
+      ->setQuantite($quantite)
+      ->setDate(new \Datetime());
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($newPerte);
+    $em->flush();
+    $this->get('session')->getFlashBag()->add('notice', 'Perte N°'.$newPerte->getId().'. '.$newPerte->getQuantite().' "'.$newPerte->getType().' '.$newPerte->getType()->getNom().'" au '.$newPerte->getEtape()->getNom().'Attribuer à'.$newPerte->getPersonne()); 
+    return $this->redirect($this->getRequest()->headers->get("referer"));
+  }
+  
   /**
    * Cancel an Etat and Give back quantite to origin
    *
@@ -170,7 +222,7 @@ class EtatController extends Controller
     $repo=$this->getDoctrine()
       ->getRepository('SansthonProdBundle:Etat');
     $etat =$repo->find($id);
-    $repo->cancel($id);
+    $repo->cancel($etat);
     $this->get('session')->getFlashBag()->add('success'," Annulation N° ".$id);
     $this->get('session')->getFlashBag()->add('notice', $etat->getEtape()." de ".$etat->getType().' '.$etat->getType()->getNom().' incrémenté de '.$etat->getQuantite()."."  );
 
