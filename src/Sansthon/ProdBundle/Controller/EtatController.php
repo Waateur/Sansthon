@@ -41,6 +41,48 @@ class EtatController extends Controller
           $this->get('session')->getFlashBag()->add('notice',$message);
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
+    /**
+  *
+  * divise an etat in two with less quanity
+  *
+  *@Route("/{id}/divise",name="etat_divise")
+  *@Method("POST")
+  */
+    public function diviseAction(Request $request,$id){
+    $etat = $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etat')
+      ->find($id);
+    if(!$etat) {
+      throw $this->createNotFoundException('Etat was not found');
+    }
+    $quantite = $request->request->get("quantite");      
+    if(!$quantite) {
+      throw $this->createNotFoundException('quantite was not found');
+    }
+    if($quantite >= $etat->getQuantite() or $quantite <=0){
+        $message = "Action impossible :La quantité a diviser est supérieur à la quantité disponible ou inférieur à 0";
+        $this->get('session')->getFlashBag()->add('error',$message);
+        return $this->redirect($this->getRequest()->headers->get("referer"));
+    }
+    $newEtat = new Etat();
+    $newEtat->setDebut($etat->getDebut())
+            ->setEtape($etat->getEtape())
+            ->setEtapeorigine($etat->getEtapeorigine())
+            ->setPersonne($etat->getPersonne())
+            ->setType($etat->getType())
+            ->setPrevue($etat->getPrevue())
+            ->setCommentaire('Division de '.$etat->getId())
+            ->setStocked($etat->getStocked())
+            ->setfin($etat->getFin())
+            ->setQuantite($quantite);
+    $etat->setQuantite( ($etat->getQuantite()-$quantite) );
+    $em=$this->getDoctrine()->getManager();
+    $em->persist($newEtat);
+    $em->flush();
+    $message= "Divison en deux en cours de ".$etat->getQuantite()." et ".$newEtat->getQuantite()." de ".$newEtat->getType();
+    $this->get('session')->getFlashBag()->add('notice',$message);
+    return $this->redirect($this->getRequest()->headers->get("referer"));
+  }
   
   /**
    *Valid and finish and Etat
