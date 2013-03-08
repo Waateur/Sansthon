@@ -110,6 +110,7 @@ class EtatController extends Controller
     $etat->setPrevue(new \Datetime($prevue));
     $dif=$quantite - $etat->getQuantite();
     $etat->setQuantite($quantite);
+    /*traitement de la différence de quantité*/
     if($dif < 0) {
       if(!$etat->getEtape()->getInitiale()){
           $perte = $this->getDoctrine()
@@ -120,7 +121,7 @@ class EtatController extends Controller
                   "type" => $etat->getType(),
                   "etape" => $etat->getEtape()
                   ));
-      }
+      }$this->get('session')->getFlashBag()->add('notice', "Nouvelle Perte de ".$perte->getQuantite()." ".$perte->getType(). " Attribuer à ".$perte->getPersonne());
     }elseif ($dif > 0) {
       if($etat->getEtapeorigine()){
         $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());

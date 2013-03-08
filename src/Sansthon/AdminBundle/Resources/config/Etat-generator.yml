@@ -15,7 +15,7 @@ builders:
         cancel: ~
   filters:
     params:
-      display: ~
+      display: [debut,prevue,fin,stocked,quantite]
   new:
     params:
       title: Création d'un en cours
