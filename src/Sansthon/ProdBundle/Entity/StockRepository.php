@@ -50,4 +50,26 @@ class StockRepository extends EntityRepository
     }
     return $stocks;
   }
+  public function getAllEvenArray(){
+    $tabStock=array();
+    $query = $this->_em
+        ->createQuery('
+            SELECT s.value,e.id as etape ,t.id as type FROM SansthonProdBundle:Stock s
+            JOIN s.etape e
+            JOIN s.type t
+            WHERE MOD(e.displayorder,2) = 0
+            ORDER BY t.reference,e.displayorder'
+        );
+    $stocks =$query->getArrayResult();
+    foreach($stocks as $stock){
+        if(!array_key_exists($stock['type'], $tabStock))
+        {
+            $tabStock[$stock['type']]=array();
+        }
+        $tabStock[$stock['type']][$stock["etape"]] = $stock['value'];
+        
+    }
+      unset($stocks);
+      return $tabStock;
+  }
 }

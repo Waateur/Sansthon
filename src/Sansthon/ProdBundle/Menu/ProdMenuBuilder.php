@@ -11,7 +11,7 @@ class ProdMenuBuilder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav');
         $menu->addChild('Admin', array('route' => 'Sansthon_AdminBundle_Type_list'));
-
+        $menu->addChild('Rapport', array('route' => 'stock'));
         // ... add more children
 
         return $menu;

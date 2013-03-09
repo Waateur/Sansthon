@@ -18,4 +18,11 @@ class EtapeRepository extends EntityRepository
       ->createQuery('SELECT e FROM SansthonProdBundle:Etape e ORDER BY e.displayorder ASC')
       ->getResult();
   }
+  public function findEvenOrderedByDisplayorder()
+  {
+    return $this->getEntityManager()
+      ->createQuery('SELECT e FROM SansthonProdBundle:Etape e WHERE MOD(e.displayorder,2) = 0 ORDER BY e.displayorder ASC')
+      ->getResult();
+  }
+  
 }

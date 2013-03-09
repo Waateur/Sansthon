@@ -36,4 +36,35 @@ class EtatRepository extends EntityRepository
     }
     $this->_em->flush();
   }
+  
+  public function getSumUnstocked(){
+      /*SELECT * , SUM( quantite ) 
+FROM  `etat` 
+WHERE stocked !=1
+AND fin IS NULL 
+GROUP BY etape_id, type_id
+LIMIT 0 , 30*/
+      
+      $tabSum=array();
+    $query = $this->_em
+        ->createQuery('
+            SELECT sum(s.quantite) as quantite,e.id as etape ,t.id as type 
+            FROM SansthonProdBundle:Etat s
+            JOIN s.etape e
+            JOIN s.type t
+            WHERE s.stocked != 1 and s.fin is null and MOD(e.displayorder,2) = 0
+            GROUP BY t.id,e.id
+            ORDER BY t.reference,e.displayorder'
+        );
+    $etats =$query->getArrayResult();
+    foreach($etats as $etat){
+        if(!array_key_exists($etat['type'], $tabSum))
+        {
+            $tabSum[$etat['type']]=array();
+        }
+        $tabSum[$etat['type']][$etat["etape"]] = $etat['quantite'];
+        
+    }
+      return $tabSum;
+  }
 }

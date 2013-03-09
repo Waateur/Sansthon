@@ -1,41 +1,41 @@
-{% extends '::base.html.twig' %}
+{% extends 'SansthonProdBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>Stock list</h1>
+    <h1>Stock Global</h1>
 
-    <table class="records_list">
+    <table class="records_list table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Value</th>
-                <th>Actions</th>
+                <th>Référence</th>
+                <th> Objectif </th>
+                {% for etape in etapes %}
+                    <th> {{etape.nom}} </th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('stock_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.value }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('stock_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('stock_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for type in types %} 
+               <tr>
+                   <td>{{type.reference}} {{type.nom}}</td>
+                   <td>{{type.objectif}}</td>
+              {% for etape in etapes %}
+                    <td>
+                        {% if stocks[type.id][etape.id] is defined %}
+                        {{stocks[type.id][etape.id]}}
+                        {% else %}
+                        0
+                        {%endif%}
+                        (
+                        {% if etats[type.id][etape.id] is defined %}
+                        {{etats[type.id][etape.id]}}
+                        {% else %}
+                        0
+                        {%endif%}
+                        )
+                    </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('stock_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

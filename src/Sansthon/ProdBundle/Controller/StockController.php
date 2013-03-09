@@ -28,10 +28,15 @@ class StockController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SansthonProdBundle:Stock')->findAllArray();
-
+        $stocks = $em->getRepository('SansthonProdBundle:Stock')->getAllEvenArray();
+        $etats = $em->getRepository('SansthonProdBundle:Etat')->getSumUnstocked();
+        $etapes = $em->getRepository('SansthonProdBundle:Etape')->findEvenOrderedByDisplayorder();
+        $types = $em->getRepository('SansthonProdBundle:Type')->findBy(array(),array("reference"=>"ASC"));
         return array(
-            'entities' => $entities,
+            'stocks' => $stocks,
+            'etats' => $etats,
+            'etapes' => $etapes,
+            'types' => $types
         );
     }
 }
