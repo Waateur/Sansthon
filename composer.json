@@ -20,7 +20,7 @@
         "jms/di-extra-bundle": "1.3.*",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "jwage/easy-csv": "dev-master",
-        "cedriclombardot/admingenerator-generator-bundle": "2.2.*@dev",
+        "cedriclombardot/admingenerator-generator-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
         "phpunit/phpunit": "*",
         "phpunit/php-timer": "1.0.4"
