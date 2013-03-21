@@ -282,6 +282,41 @@ class EtatController extends Controller
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
 
+  
+   /**
+   * Show Entity filter by a type.
+   *
+   * @Route("/bypersonne", name="etat_by_personne")
+   * @Template("SansthonProdBundle:Etat:bypersonne.html.twig")
+   */
+  public function byPersoneAction(Request $request){
+    $id=$request->query->get('id');
+    $personneList= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Personne')
+      ->findAll();
+
+    if(empty($id)){
+      return array(
+          'personnes' => $personneList,
+          'personne' => null,
+          'etatList' => null,
+          );
+    }
+    $currentPersonne= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Personne')
+      ->find($id);
+    $etatList =$this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etat')
+      ->findBy(array("personne" => $currentPersonne,"fin" => null, "stocked" => false ));
+    return array(
+        'etats' => $etatList,
+        'personnes' => $personneList,
+        'personne' => $currentPersonne,
+        );
+
+  }
+  
+  
 
   /**
    * Show Entity filter by a type.
