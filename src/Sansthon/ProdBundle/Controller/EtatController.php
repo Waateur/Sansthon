@@ -32,6 +32,7 @@ class EtatController extends Controller
     $perte = $this->getDoctrine()
       ->getRepository('SansthonProdBundle:Perte')
       ->createPerteFromEtat($etat);
+   if($perte) {
     $this->getDoctrine()->getManager()->flush();
              $message =  "Création de la perte n°".$perte->getId()." de ".$perte->getQuantite()." ".$perte->getType();
           if($perte->getPersonne()){
@@ -39,6 +40,12 @@ class EtatController extends Controller
           }
               
           $this->get('session')->getFlashBag()->add('notice',$message);
+    }else
+    {
+         $message = " une Erreur c'est produite la perte n'a pas était ajouter";
+         $this->get('session')->getFlashBag()->add('error',$message);
+    }
+    
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
     /**
@@ -104,6 +111,9 @@ class EtatController extends Controller
       ->find($id);
     if(!$etat) {
       throw $this->createNotFoundException('Etat was not found');
+    }elseif ( $etat->getStocked() or $etat->getFin()){
+            $this->get('session')->getFlashBag()->add('error', "etat ".$etat->getId()."est déja validé.");
+            return $this->redirect($this->getRequest()->headers->get("referer"));
     }
     // processing
     $etat->setPersonne($personne);
