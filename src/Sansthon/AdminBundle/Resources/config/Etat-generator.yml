@@ -9,13 +9,13 @@ builders:
   list:
     params:
       title: Liste des Encours
-      display: ~
+      display: [type,etape,quantite,personne,debut,prevue,fin,stocked]
       object_actions:
         edit: ~
         cancel: ~
   filters:
     params:
-      display: [debut,prevue,fin,stocked,quantite]
+      display: [debut,prevue,fin,stocked,quantite,type,personne,etape]
   new:
     params:
       title: Création d'un en cours
