@@ -19,6 +19,9 @@ class ProdMenuBuilder extends ContainerAware {
         $encours->setExtra('caret', true);
         $encours->addChild("Classer par Référence",array('route' => 'etat_by_type'));
         $encours->addChild("Classer par Personne", array('route' => 'etat_by_personne'));
+        $encours->addChild("Classer par Etape", array('route' => 'etat_by_etape'));
+        
+        
         
         $menu->addChild('Rapport Global', array('route' => 'stock'));
         // ... add more children

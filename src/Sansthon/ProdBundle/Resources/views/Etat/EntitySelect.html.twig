@@ -1,0 +1,16 @@
+{% block selectform -%}
+<div class="selectform">
+<form action="{{url(path)}}" method="get">
+  <select name="id" onchange="this.form.submit()"  >
+    <option></option>
+    {% for entity in entities %}
+      {% if current and entity.id == current.id %}
+      <option selected="true" value="{{ entity.id }}"> {{entity}}</option>
+      {% else %}
+      <option value="{{ entity.id }}">{{entity}}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</form>
+</div>
+{% endblock %}

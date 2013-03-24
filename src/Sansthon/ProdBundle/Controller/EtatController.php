@@ -283,6 +283,40 @@ class EtatController extends Controller
   }
 
   
+     /**
+   * Show Entity filter by a type.
+   *
+   * @Route("/byetape", name="etat_by_etape")
+   * @Template("SansthonProdBundle:Etat:byEtape.html.twig")
+   */
+  public function byEtapeAction(Request $request){
+    $id=$request->query->get('id');
+    $etapeList= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etape')
+      ->findAll();
+
+    if(empty($id)){
+      return array(
+          'etapes' => $etapeList,
+          'etape' => null,
+          'etats' => null,
+          );
+    }
+    $currentEtape= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etape')
+      ->find($id);
+    $etatList =$this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Etat')
+      ->findBy(array("etape" => $currentEtape,"fin" => null, "stocked" => false ));
+    return array(
+        'etats' => $etatList,
+        'etapes' => $etapeList,
+        'etape' => $currentEtape,
+        );
+
+  }
+  
+  
    /**
    * Show Entity filter by a type.
    *
@@ -299,7 +333,7 @@ class EtatController extends Controller
       return array(
           'personnes' => $personneList,
           'personne' => null,
-          'etatList' => null,
+          'etats' => null,
           );
     }
     $currentPersonne= $this->getDoctrine()
