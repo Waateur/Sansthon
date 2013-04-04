@@ -1,7 +1,7 @@
 {% extends 'SansthonProdBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>En cours par Réfèrence </h1>
+    <h1>En cours par Étape </h1>
 {% include 'SansthonProdBundle:Etat:EntitySelect.html.twig'
                with {'entities': etapes, 'path': 'etat_by_etape','current': etape}
 %}

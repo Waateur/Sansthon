@@ -1,7 +1,7 @@
 {% extends 'SansthonProdBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>En cours par Réfèrence </h1>
+    <h1>En cours par Personne </h1>
 {% include 'SansthonProdBundle:Etat:PersonneSelect.html.twig'
                with {'personnes': personnes, 'path': 'etat_by_personne','current': personne}
 %}
