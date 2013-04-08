@@ -17,7 +17,7 @@ builders:
         delete: ~
   filters:
     params:
-      display: [type,etape]
+      display: [type,etape,value]
   new:
     params:
       title: Ajouter un Stock
