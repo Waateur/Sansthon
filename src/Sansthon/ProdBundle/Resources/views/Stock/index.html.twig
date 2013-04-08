@@ -9,7 +9,7 @@
                 <th>Référence</th>
                 <th> Objectif </th>
                 {% for etape in etapes %}
-                    <th> {{etape.nom}} </th>
+                    <th colspan=2 > {{etape.nom}} </th>
                 {% endfor %}
             </tr>
         </thead>
@@ -25,13 +25,15 @@
                         {% else %}
                         0
                         {%endif%}
-                        (
+                        </td> <td class="text-info">
+                        +
                         {% if etats[type.id][etape.id] is defined %}
+                        
                         {{etats[type.id][etape.id]}}
                         {% else %}
                         0
                         {%endif%}
-                        )
+                        
                     </td>
                 {% endfor %}
               </tr>
