@@ -56,11 +56,11 @@
                         <!--<a class="btn btn-primary">Diviser</a> -->
                     </div>
                 </td>
-                <td>{{entity.type.reference}} {{entity.type.nom}} </td>
+                <td  >{{entity.type.reference}} {{entity.type.nom}} </td>
                 <td><input type="number" name="quantite" class="input-small" value="{{ entity.quantite }}"></input></td>
                 <td>{{ entity.etape }}</td>
-                <td>
-                <select name="personne" class="input-small">
+                <td >
+                <select name="personne" class="">
                     <option></option>
                      {% for role  in entity.etape.roles %}
                         {% for personne  in role.personnes %}

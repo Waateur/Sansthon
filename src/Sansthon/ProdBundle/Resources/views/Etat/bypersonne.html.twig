@@ -36,7 +36,7 @@
                 <td><input type="number" name="quantite" class="input-small" value="{{ entity.quantite }}"></input></td>
                 <td>{{ entity.etape }}</td>
                 <td>
-                <select name="personne" class="input-small">
+                <select name="personne" class="">
                     <option></option>
                      {% for role  in entity.etape.roles %}
                         {% for personne  in role.personnes %}
@@ -61,7 +61,7 @@
                     </span> 
                   </span>
                 </td>
-                <td> 
+                <td > 
                   <div class="btn-group">
                      <button type="submit" class="btn btn-success">Valider</button>
                  </div>
