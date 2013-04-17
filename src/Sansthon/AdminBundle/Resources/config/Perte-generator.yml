@@ -10,8 +10,8 @@ builders:
     params:
       title: List des Pertes
       display: [type,quantite,date,personne,etape]
-      #actions:
-       # new: ~
+      actions:
+        new: ~
       object_actions:
         edit: ~
         delete: ~

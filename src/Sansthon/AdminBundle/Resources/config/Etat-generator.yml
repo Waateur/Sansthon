@@ -13,6 +13,8 @@ builders:
       object_actions:
         edit: ~
         cancel: ~
+      actions:
+        new: ~
   filters:
     params:
       display: [debut,prevue,fin,stocked,quantite,type,personne,etape]
