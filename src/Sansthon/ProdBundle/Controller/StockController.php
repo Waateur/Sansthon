@@ -94,9 +94,9 @@ class StockController extends Controller {
                     array_push($td, 0);
                 }
                 if (isset($etats[$type->getId()][$etape->getId()]) ){
-                    array_push($td, "(" . $etats[$type->getId()][$etape->getId()] . ")");
+                    array_push($td, "+" . $etats[$type->getId()][$etape->getId()]);
                 } else {
-                    array_push($td, "(0)");
+                    array_push($td, "+0");
                 }
                 array_push($row,implode("",$td));
             }
