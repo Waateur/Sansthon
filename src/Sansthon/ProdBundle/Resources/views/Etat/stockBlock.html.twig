@@ -1,0 +1,24 @@
+<div class="row-fluid">
+ {% for stock in stocks %}
+   <div class="stockblock well span2">
+    <header>{{stock.etape}}</header>
+    <section id="stock{{stock.etape.id}}" class="stockvalue"> {{stock.value}} </section>
+    <div class="row-fluid btn-group">
+    
+    {% if stock.etape.initiale %}
+        <a href="#{{stock.etape}}NouveauModal" role="button" class="btn btn-success btn-mini" data-toggle="modal">Nouveau</a>
+    {% endif %}
+    {% for chemin in stock.etape.sorties %}
+          <a href="#{{stock.etape}}{{chemin.nom}}Modal" role="button" class="btn btn-primary btn-mini" data-toggle="modal">{{chemin.nom}}</a>
+          {% if loop.index is divisibleby(3) and not loop.last %}
+            </div> <div class= "row-fluid btn-group ">
+          {% endif %}
+   
+    {% endfor %}
+     {% if stock.etape.finale %}
+        <a href="#{{stock.etape}}FinaleModal" role="button" class="btn btn-danger btn-mini" data-toggle="modal">Perte</a>
+    {% endif %}
+    </div>
+  </div>
+ {% endfor %}
+</div>

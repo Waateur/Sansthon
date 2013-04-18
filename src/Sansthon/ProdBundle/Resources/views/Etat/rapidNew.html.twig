@@ -1,0 +1,10 @@
+<div class="selectform">
+<form>
+  <select name="id" >
+    <option></option>
+    {% for type in types %}
+      <option value="{{ type.id }}">{{type.reference}} {{ type.nom }}</option>
+    {% endfor %}
+  </select>
+</form>
+</div>

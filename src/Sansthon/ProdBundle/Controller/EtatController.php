@@ -131,12 +131,12 @@ class EtatController extends Controller
                   "type" => $etat->getType(),
                   "etape" => $etat->getEtape()
                   ));
-      }$this->get('session')->getFlashBag()->add('notice', "Nouvelle Perte de ".$perte->getQuantite()." ".$perte->getType(). " Attribuer à ".$perte->getPersonne());
+      }$this->get('session')->getFlashBag()->add('notice', "Santons ".$etat->getType()->getReference().", nouvelle perte de ".$perte->getQuantite(). " Attribuer à ".$perte->getPersonne());
     }elseif ($dif > 0) {
       if($etat->getEtapeorigine()){
         $stock= $this->getDoctrine()->getRepository('SansthonProdBundle:Stock')->getByEtapeAndType($etat->getEtapeorigine(),$etat->getType());
         $stock->subValue($dif);
-        $this->get('session')->getFlashBag()->add('error', "stock de ".$etat->getEtapeorigine()." décrémenter de ".$dif);
+        $this->get('session')->getFlashBag()->add('error', "Santons ".$etat->getType()->getReference().", stock de ".$etat->getEtapeorigine()." terminés décrémenter de ".$dif.' .');
       }
     }
     $etat->setFin(new \Datetime());
@@ -146,7 +146,7 @@ class EtatController extends Controller
       ->getByEtapeAndType($etat->getEtape(),$etat->getType())
       ->addValue($etat->getQuantite());
     $this->getDoctrine()->getManager()->flush();
-    $this->get('session')->getFlashBag()->add('success', "etat ".$etat->getId()." Validé ".$etat->getEtape()->getNom()." incrémenté de ".$etat->getQuantite());
+    $this->get('session')->getFlashBag()->add('success', "etat ".$etat->getId()." Validé ". $etat->getType()->getReference()." Stock de ". $etat->getEtape()->getNom()." terminés incrémenté de ".$etat->getQuantite());
     return $this->redirect($this->getRequest()->headers->get("referer"));
   }
 
@@ -328,12 +328,16 @@ class EtatController extends Controller
     $personneList= $this->getDoctrine()
       ->getRepository('SansthonProdBundle:Personne')
       ->findAll();
+    $types= $this->getDoctrine()
+      ->getRepository('SansthonProdBundle:Type')
+      ->findAll();
 
     if(empty($id)){
       return array(
           'personnes' => $personneList,
           'personne' => null,
           'etats' => null,
+          'types' => $types,
           );
     }
     $currentPersonne= $this->getDoctrine()
@@ -346,6 +350,7 @@ class EtatController extends Controller
         'etats' => $etatList,
         'personnes' => $personneList,
         'personne' => $currentPersonne,
+        'types' => $types,
         );
 
   }

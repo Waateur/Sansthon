@@ -39,7 +39,28 @@ class StockController extends Controller {
             'types' => $types
         );
     }
+   /**
+     * Finds and displays a Stock entity.
+     *
+     * @Route("/type/{id}", name="stock_type_show" , defaults={"_format"="json"})
+     * @Method("GET")
+     * @Template()
+     */
+   /* public function showStockAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $entities = $em->getRepository('SansthonProdBundle:Stock')->findby(array("type_id" => $id));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Stock entity.');
+        }
+
+        return array(
+            'entities'=> $entities
+        );
+    }
+*/
     /**
      * Lists all Stock entities.
      *

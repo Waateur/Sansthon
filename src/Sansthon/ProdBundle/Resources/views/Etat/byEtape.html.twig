@@ -1,99 +1,23 @@
 {% extends 'SansthonProdBundle::layout.html.twig' %}
-
+{% block titleright %}
+    {%if etape is not null %}
+        etape:  {{etape.nom}}
+    {%endif%}
+{% endblock %}
 {% block body -%}
-    <h1>En cours par Étape </h1>
+    {%if etape is not null %}
+        <h1>En cours pour {{etape.nom}}</h1>
+    {%else %}
+       <h1>En cours par Étape </h1>
+    {%endif%}
+    
 {% include 'SansthonProdBundle:Etat:EntitySelect.html.twig'
                with {'entities': etapes, 'path': 'etat_by_etape','current': etape}
 %}
 
-    <table class="table table-striped table-condensed">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Quantité</th>
-                <th>Etape</th>
-                <th>Attribution</th>
-                <th>Prévision</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-       {% if etats %}
-        {% for entity in etats %}
-          <form action="{{path('etat_valide')}}" method="post" >
-            <tr>
-                <td >
-                    <div class="btn-group"> 
-                        <a href="" class="btn btn-info">{{ entity.id }}</a>
-                        <a href="#{{entity.id}}DiviseModal" role="button" class="btn btn-primary" data-toggle="modal">Diviser</a>
-                        <a href="{{path('etat_cancel',{'id': entity.id})}}" class="btn btn-primary">Annuler </a>
-                        <a href="{{path('etat_toperte',{'id':entity.id})}}" class="btn btn-danger">Perte</a>
-                        <!--<a class="btn btn-primary">Diviser</a> -->
-                    </div>
-                </td>
-                <td>{{entity.type.reference}} {{entity.type.nom}} </td>
-                <td><input type="number" name="quantite" class="input-small" value="{{ entity.quantite }}"></input></td>
-                <td>{{ entity.etape }}</td>
-                <td>
-                <select name="personne" class="">
-                    <option></option>
-                     {% for role  in entity.etape.roles %}
-                        {% for personne  in role.personnes %}
-                         {% if entity.personne %}
-                          {% if personne.id and entity.personne.id == personne.id %}
-                             <option selected="true" value="{{personne.id}}">{{personne}}</option>
-                              {%else %}
-                             <option value="{{personne.id}}">{{personne}}</option>
-                            {% endif %} 
-                          {% else %}
-                           <option value="{{personne.id}}">{{personne}}</option>
-                          {% endif %}
-                        {% endfor %}
-                      {% endfor %}
-                 </select>
-                </td>
-                <td>
-                  <span class="input-append">
-                    <input type="text" name="prevue" value="{{ entity.prevue|date('Y-m-d') }}"  class="dateform input-small" />
-                    <span class="add-on">
-                        <i class="icon-calendar"></i>
-                    </span> 
-                  </span>
-                </td>
-                <td class="span2"> 
-                  <div class="btn-group">
-                     <button type="submit" class="btn btn-success">Valider</button>
-                 </div>
-                </td>
-            </tr>
-          <input type="hidden" name="id" value="{{entity.id}}" />
-          </form>
-        <div id="{{entity.id}}DiviseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3>Diviser {{entity.id}} </h3>
-          </div>
-          <form action="{{path("etat_divise",{'id': entity.id})}}" method="post">
-            <fieldset>
-              <div class="modal-body">
-                    <div class="input-append input-prepend">
-                        <label for="quantite">Quantité</label>
-                        <input type="number" name="quantite" value="{{ entity.quantite }}"></input>
-                    </div>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        {% endfor %}
-        {% endif %}
-        </tbody>
-    </table>
-
+    {% include 'SansthonProdBundle:Etat:enCoursTab.html.twig'
+               with {'etatList': etats}
+%}
  
     <!-- Modal -->
     {% block modal -%}
